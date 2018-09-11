@@ -1,6 +1,17 @@
-<p>
-  login works!
-  <br/>
-  api url = {{ apiUrl }}
-  <button (click)="getMethod()"> get method </button>
-</p>
+<div class="container">
+      <div class="ui-g">
+          <div class="ui-g-6 ui-md-offset-4">
+              <label>ชื่อบัญชี </label>
+              <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                  <input type="text" placeholder="Username" [(ngModel)]="usernmae">
+              </div>
+              <label>รหัสผ่าน </label>
+              <div class="ui-inputgroup">
+                  <span class="ui-inputgroup-addon"><i class="fa fa-lock"></i></span>
+                  <input type="password" placeholder="Password" [(ngModel)]="password">
+              </div>
+              <button pButton type="button" label="เข้าสู่ระบบ"class="ui-button-success"></button>
+          </div>
+    </div>
+</div>

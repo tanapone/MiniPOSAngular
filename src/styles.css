@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face{
+  font-family: KanitThin;
+  src:url('fonts/Kanit-Thin.ttf');
+}
+@font-face{
+  font-family: KanitRegular;
+  src:url('fonts/Kanit-Regular.ttf')
+}
+@font-face{
+  font-family: KanitExtraLight;
+  src:url('fonts/Kanit-ExtraLight.ttf')
+}
+
+body{
+  font-family:  KanitRegular;
+}
