@@ -11,6 +11,17 @@
   src:url('fonts/Kanit-ExtraLight.ttf')
 }
 
-body{
+html,body{
   font-family:  KanitRegular;
+  height: 100%;
+}
+.login-background{
+  background-color:#B2DFDB;
+  height: 100%;
+}
+.login-background .login-frm{
+  background-color:#fff;
+  padding:10px;
+  margin-top:6em;
+  margin-bottom:2em;
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { LoginService } from 'src/app/shared_service/login.service'
+import { LoginControllerService } from 'src/app/shared_service/login-controller.service'
 import { User } from 'src/app/class/user';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-login',
@@ -18,48 +19,34 @@ export class LoginComponent implements OnInit {
   errorMsg = {
     usernameRequired:false,
     passwordRequied:false,
-    wrongAuth:false
+    wrongAuth:''
   }
 
-  constructor(private loginService : LoginService) { }
+  constructor(private loginController : LoginControllerService,private localSt:LocalStorageService) { }
 
-    async verifyLogin(){
-
-      if(this.username==null){
-        this.errorMsg.usernameRequired = true;
-      }else if(this.password==null){
-        this.errorMsg.passwordRequied = true;
+     verifyLogin(){
+      console.log('username : '+this.username +' password : '+this.password)
+      if(this.username=="" || this.username==null || this.password=="" || this.password==null){
+        this.errorMsg.wrongAuth='กรุณากรอกชื่อบัญชี และ รหัสผ่าน'
       }else{
       this.user.setUsername(this.username);
       this.user.setPassword(this.password);
-      this.errorMsg.usernameRequired = false;
-      this.errorMsg.passwordRequied = false;
-      await this.loginService.verifyLogin(this.user).then((data:any)=>{
-        let dataResult = data;
-        this.user.setId(dataResult.id)
-        this.user.setUsername(dataResult.username)
-        this.user.setPassword(dataResult.password)
-        this.user.setUserType(dataResult.userType)
-        this.user.setFirstName(dataResult.firstName)
-        this.user.setLastName(dataResult.lastName)
-        this.user.setEmail(dataResult.email)
-        this.user.setPhoneNumber(dataResult.phoneNumber)
-        this.user.setAddress(dataResult.address)
-        this.user.setAuthKey(dataResult.authKey)
-        console.log('setter')
-      }),error=>{
-        console.log('error')
+      this.loginController.verifyLogin(this.user).then((res:any)=>{
+        let responseData = JSON.parse(res)
+        if(responseData.message){
+          if(responseData.message=='No permission.'){
+            this.errorMsg.wrongAuth = 'คุณไม่มีสิทธิ์ใช้งานในส่วนนี้'
+          }else if(responseData.message=='Wrong username or password.'){
+            this.errorMsg.wrongAuth = 'ชื่อบัญชี หรือ รหัสผ่านไม่ถูกต้อง'
+          }
+        }
+        console.log(responseData)
+      })
       }
-      console.log(this.user)
-      console.log('get user')
-      if(this.user.getUsername() === undefined){
-        this.errorMsg.wrongAuth = true
-      }else{
-        alert('username : '+this.user.getUsername())
-        this.errorMsg.wrongAuth = false
-      }
-      
     }
+    
+    delete(){
+      this.localSt.clear();
     }
 
   ngOnInit() {

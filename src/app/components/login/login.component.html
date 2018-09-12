@@ -1,17 +1,35 @@
-<div class="container">
-      <div class="ui-g">
-          <div class="ui-g-6 ui-md-offset-4">
-              <label>ชื่อบัญชี </label>
-              <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
-                  <input type="text" placeholder="Username" [(ngModel)]="usernmae">
+<div class="login-background">
+  <div class="container">
+      <div class="row justify-content-center">
+              <div class="col-md-4 col-md-offset-4 login-frm">
+                <h3 style="text-align:center">ระบบจัดการคลังสินค้า MiniPOS</h3>
+                  <label>ชื่อบัญชี </label>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fa fa-user"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username"  [(ngModel)]="username" name="username" autocomplete="false">
+                      </div>
+
+                  <label>รหัสผ่าน </label>
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Password"  [(ngModel)]="password" name="password" autocomplete="false">
+                  </div>
+                  <button type="button" class="btn btn-outline-primary btn-block" (click)="verifyLogin()">เข้าสู่ระบบ</button>
+                  <div style="text-align:center;display:block;margin-top:1em">
+                    <a routerLink="products" style="text-align:center">ลืมรหัสผ่าน ?</a> 
+                  </div>
+                  
+                  
+                  {{ user.getAuthKey() }}
+                  <br/>
               </div>
-              <label>รหัสผ่าน </label>
-              <div class="ui-inputgroup">
-                  <span class="ui-inputgroup-addon"><i class="fa fa-lock"></i></span>
-                  <input type="password" placeholder="Password" [(ngModel)]="password">
-              </div>
-              <button pButton type="button" label="เข้าสู่ระบบ"class="ui-button-success"></button>
-          </div>
-    </div>
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="errorMsg.wrongAuth!=''" style="text-align:center;">
+          {{ errorMsg.wrongAuth }}
+        </div>
+  </div>
 </div>
