@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {Ng2Webstorage} from 'ngx-webstorage';
+import { NgxsModule } from '@ngxs/store';
 // PrimeNG
 import { AccordionModule } from 'primeng/primeng';
 import { PanelModule } from 'primeng/primeng';
@@ -22,8 +23,8 @@ import { LoginControllerService } from './shared_service/login-controller.servic
 import { UserManagementComponent } from './components/user-management/user-management.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductManagementComponent } from './components/product-management/product-management.component';
-import { CategoryManagementComponent } from './components/category-management/category-management.component'
-
+import { CategoryManagementComponent } from './components/category-management/category-management.component';
+import { NavbarComponent } from './components/navbar/navbar.component'
 const appRoutes:Routes=[
   {
     path:'',
@@ -49,7 +50,8 @@ const appRoutes:Routes=[
     UserManagementComponent,
     LoginComponent,
     ProductManagementComponent,
-    CategoryManagementComponent
+    CategoryManagementComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ const appRoutes:Routes=[
     ButtonModule,
     RadioButtonModule,
     AngularFontAwesomeModule,
-    InputTextModule
+    InputTextModule,
+    NgxsModule
     
   ],
   providers: [
